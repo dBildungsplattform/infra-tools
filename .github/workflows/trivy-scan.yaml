@@ -57,5 +57,10 @@ jobs:
       - name: Upload trivy report as a Github artifact
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f #v6.0.0
         with:
+<<<<<<< HEAD
           name: "trivy-sbom-report"
           path: '${{ github.workspace }}/dependency-results.sbom.json'
+=======
+          name: "trivy-sbom-report-${{ inputs.image }}"
+          path: '${{ github.workspace }}/dependency-results-${{ inputs.image }}.sbom.json'
+>>>>>>> 4a24395 (fix stoopid)
