@@ -18,6 +18,7 @@ jobs:
       security-events: write
       contents: read
     uses: dBildungsplattform/dbp-github-workflows/.github/workflows/image-publish-trivy.yaml@7
+    secrets: inherit
     with:
       image_name: "infra-tools-debian"
       context: "./infra-tools-debian/"
