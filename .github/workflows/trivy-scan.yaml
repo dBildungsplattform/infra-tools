@@ -9,11 +9,7 @@ on:
         type: string
       image:
         description: "image name"
-<<<<<<< HEAD
         required: false
-=======
-        required: true
->>>>>>> 97fee73 (add inputs declaration)
         type: string
 
 jobs:
