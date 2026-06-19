@@ -102,8 +102,6 @@ RUN cd /tmp && \
     tar -xf helm-v$HELM_VERSION-linux-amd64.tar.gz && \
     install -o root -g root -m 0755 linux-amd64/helm /usr/local/bin/helm && \
     rm -rf linux-amd64 helm-v$HELM_VERSION-linux-amd64.tar.gz
-ENV HELM_DATA_HOME=/runner/.local/share/helm
-RUN git clone --depth 1 --revision $HELM_DIFF_HASH https://github.com/databus23/helm-diff.git && helm plugin install helm-diff
 RUN export LANGUAGE="C.UTF-8"
 RUN /output/scripts/check_ansible $PYCMD
 
