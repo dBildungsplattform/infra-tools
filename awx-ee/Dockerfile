@@ -104,15 +104,20 @@ COPY --from=builder /usr/local/bin/kubectl /usr/local/bin/kubectl
 COPY --from=builder /usr/local/bin/helm /usr/local/bin/helm
 COPY --from=builder /usr/local/bin/op /usr/local/bin/op
 
-ARG HELM_DIFF_HASH=5873f8d94712f014dc2bb329acae63b8ffbf569b #3.15.10
-RUN git clone --depth 1 --revision $HELM_DIFF_HASH https://github.com/databus23/helm-diff.git && helm plugin install helm-diff && rm -rf helm-diff
 
 RUN /output/scripts/install-from-bindep
+RUN chmod ug+rw /etc/passwd
 RUN mkdir -p /runner && chgrp 0 /runner && chmod -R ug+rwx /runner
 WORKDIR /runner
 RUN $PYCMD -m pip install --no-cache-dir 'dumb-init==1.2.5'
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.12 1
 LABEL ansible-execution-environment=true
+
 USER 1000
+
+ENV HELM_DATA_HOME=/runner/.local/share/helm
+ARG HELM_DIFF_HASH=5873f8d94712f014dc2bb329acae63b8ffbf569b #3.15.10
+RUN git clone --depth 1 --revision $HELM_DIFF_HASH https://github.com/databus23/helm-diff.git && helm plugin install helm-diff
+
 ENTRYPOINT ["/opt/builder/bin/entrypoint", "dumb-init"]
 CMD ["bash"]
