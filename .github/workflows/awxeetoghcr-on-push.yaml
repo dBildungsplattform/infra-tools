@@ -35,7 +35,12 @@ jobs:
       packages: write
       security-events: write
       contents: read
-    uses: dBildungsplattform/dbp-github-workflows/.github/workflows/image-publish-trivy.yaml@7
+    uses: 
+      - dBildungsplattform/dbp-github-workflows/.github/workflows/image-publish-trivy.yaml@7
+      - uses: actions/download-artifact@v4
+        with:
+          name: awx-ee-context
+          path: awx-ee/context
     with:
       image_name: "awx-ee"
       context: "./awx-ee/context"
