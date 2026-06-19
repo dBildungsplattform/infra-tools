@@ -39,8 +39,7 @@ jobs:
     with:
       image_name: "awx-ee"
       context: "./awx-ee/context"
-      image_tag_generation: "specified"
-      image_tag: "awx-ee-2.4.2"
+      image_tag_generation: "ticket_from_branch"
       add_latest_tag: false
       container_registry: "ghcr.io"
       run_trivy_scan: true
