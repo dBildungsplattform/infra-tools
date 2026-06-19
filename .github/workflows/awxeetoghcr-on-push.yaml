@@ -38,7 +38,7 @@ jobs:
     uses: dBildungsplattform/dbp-github-workflows/.github/workflows/image-publish-trivy.yaml@generate-dockerfile
     with:
       image_name: "awx-ee"
-      context: "./awx-ee/context"
+      context: "."
       image_tag_generation: "specified"
       image_tag: "awx-ee-2.4.2"
       add_latest_tag: false
