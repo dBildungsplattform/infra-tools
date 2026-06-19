@@ -26,7 +26,7 @@ jobs:
       - name: upload build context
         uses: actions/upload-artifact@v4
         with:
-          name: awx-ee-context
+          name: build-code
           path: awx-ee/context
 
   build_image_on_push:
@@ -35,12 +35,7 @@ jobs:
       packages: write
       security-events: write
       contents: read
-    uses: 
-      - dBildungsplattform/dbp-github-workflows/.github/workflows/image-publish-trivy.yaml@7
-      - uses: actions/download-artifact@v4
-        with:
-          name: awx-ee-context
-          path: awx-ee/context
+    uses: dBildungsplattform/dbp-github-workflows/.github/workflows/image-publish-trivy.yaml@generate-dockerfile
     with:
       image_name: "awx-ee"
       context: "./awx-ee/context"
@@ -51,3 +46,4 @@ jobs:
       run_trivy_scan: true
       run_clamav_scan: true
       limit-severities-for-sarif: false
+      code_source: "artifact"
