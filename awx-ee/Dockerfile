@@ -105,7 +105,7 @@ COPY --from=builder /usr/local/bin/helm /usr/local/bin/helm
 COPY --from=builder /usr/local/bin/op /usr/local/bin/op
 
 
-RUN /output/scripts/install-from-bindep
+RUN /output/scripts/install-from-bindep && rm -rf /output/wheels
 RUN chmod ug+rw /etc/passwd
 RUN mkdir -p /runner && chgrp 0 /runner && chmod -R ug+rwx /runner
 WORKDIR /runner
