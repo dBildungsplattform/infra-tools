@@ -22,7 +22,7 @@ jobs:
         run: pip install ansible-builder
       - name: build Dockerfile from execution-environment.yml
         working-directory: awx-ee
-        run: ansible-builder create --output-filename Dockerfile
+        run: ansible-builder create
       - name: upload build context
         uses: actions/upload-artifact@v4
         with:
