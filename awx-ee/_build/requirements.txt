@@ -2,7 +2,7 @@ git+https://github.com/hpi-schul-cloud/infra-tools.git#subdirectory=onepwd
 ansible==11.6.0
 ansible-core==2.18.6
 kubernetes==32.0.1
-ionoscloud==6.1.9
+ionoscloud==6.1.13
 ionoscloud-dbaas-mongo==1.2.2
 pyotp==2.6.0
 grafana_api
