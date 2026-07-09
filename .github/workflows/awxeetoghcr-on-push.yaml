@@ -25,11 +25,11 @@ jobs:
         run: ansible-builder create --output-filename Dockerfile
       # see https://github.com/actions/upload-artifact#permission-loss
       - name: tar files
-        run: tar -cvf build_code.tar awx-ee/context
+        run: tar -cvf build-code.tar awx-ee/context
       - name: upload build context
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #v7.0.1
         with:
-          path: build_code.tar
+          path: build-code.tar
           archive: false
           retention-days: 1
 
