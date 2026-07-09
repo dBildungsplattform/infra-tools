@@ -81,19 +81,21 @@ ARG PKGMGR
 
 ARG HELM_VERSION=3.18.2
 ARG TERRAFORM_VERSION=1.5.4
+ARG OPENTOFU_VERSION=1.6.2
 ARG KUBECTL_VERSION=1.33.7
 ARG OP_VERSION=2.31.0
 RUN pip3 install --upgrade pip setuptools
 RUN dnf install -y unzip
 RUN dnf install -y openssl
 RUN dnf upgrade libcurl-minimal -y
-RUN dnf upgrade --refresh
+RUN dnf upgrade --refresh -y
 RUN cd /tmp && curl -LO https://releases.hashicorp.com/terraform/$TERRAFORM_VERSION/terraform_${TERRAFORM_VERSION}_linux_amd64.zip && unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip && install -o root -g root -m 0755 terraform /usr/local/bin/terraform
+RUN cd /tmp && curl --proto '=https' --tlsv1.2 -fsSL https://get.opentofu.org/install-opentofu.sh -o install-opentofu.sh && chmod +x /tmp/install-opentofu.sh && /tmp/install-opentofu.sh --install-method standalone --opentofu-version ${OPENTOFU_VERSION} --install-path /tmp/ && install -o root -g root -m 0755 /tmp/tofu /usr/local/bin/tofu
 RUN curl -LO https://dl.k8s.io/release/v$KUBECTL_VERSION/bin/linux/amd64/kubectl
 RUN install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 RUN cd /tmp && curl -LO https://get.helm.sh/helm-v$HELM_VERSION-linux-amd64.tar.gz &&  tar -xf helm-v$HELM_VERSION-linux-amd64.tar.gz && install -o root -g root -m 0755 linux-amd64/helm /usr/local/bin/helm
 RUN cd /tmp && curl -LO https://cache.agilebits.com/dist/1P/op2/pkg/v$OP_VERSION/op_linux_amd64_v$OP_VERSION.zip && unzip op_linux_amd64_v$OP_VERSION.zip && install -o root -g root -m 0755 op /usr/local/bin/op
-RUN rm /tmp/helm-v$HELM_VERSION-linux-amd64.tar.gz /tmp/op /tmp/op.sig /tmp/op_linux_amd64_v$OP_VERSION.zip /tmp/terraform /tmp/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+RUN rm /tmp/helm-v$HELM_VERSION-linux-amd64.tar.gz /tmp/op /tmp/op.sig /tmp/op_linux_amd64_v$OP_VERSION.zip /tmp/terraform /tmp/terraform_${TERRAFORM_VERSION}_linux_amd64.zip /tmp/install-opentofu.sh
 RUN export LANGUAGE="C.UTF-8"
 RUN /output/scripts/check_ansible $PYCMD
 
