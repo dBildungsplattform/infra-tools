@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: install ansible-builder
-        run: pip install ansible-builder
+        run: pip install ansible-builder==3.1.1
       - name: build Dockerfile from execution-environment.yml
         working-directory: awx-ee
         run: ansible-builder create --output-filename Dockerfile
