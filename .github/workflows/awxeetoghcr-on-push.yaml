@@ -43,11 +43,8 @@ jobs:
     with:
       image_name: "awx-ee"
       context: "./awx-ee/"
-      #todo: change
-      image_tag_generation: "specified"
+      image_tag_generation: "ticket_from_branch"
       code_source: "artifact"
-      #todo: remove
-      image_tag: "awx-ee-2.4.2"
       add_latest_tag: false
       container_registry: "ghcr.io"
       run_trivy_scan: true
