@@ -6,7 +6,6 @@ on:
       - "infra-tools-*.*.*"
       - "infra-tools-debian-*.*.*"
       - "dbcmetrics-*.*.*"
-      - "awx-ee-*.*.*"
       - "cron-tools-*.*.*"
       - "cron-tools-debian-*.*.*"
 
