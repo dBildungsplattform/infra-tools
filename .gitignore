@@ -12,3 +12,6 @@ prod-container-list/*.csv
 prod-container-list/*.log
 
 onepwd/credentials.json
+
+awx-ee/context/
+awx-ee/Dockerfile
