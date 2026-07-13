@@ -1,0 +1,62 @@
+name: awx-ee Build and push Docker Image on Tag
+
+on:
+  push:
+    tags:
+      - "awx-ee-*.*.*"
+
+jobs:
+  pre_build:
+    runs-on: ubuntu-latest
+    outputs:
+      image_name: ${{ steps.extract.outputs.image_name }}
+    steps:
+      - name: Extract image name from tag
+        id: extract
+        run: |
+          IMAGE_NAME="$(echo "${GITHUB_REF_NAME}" | sed -E 's/-[0-9]+\.[0-9]+\.[0-9]+$//')"
+          echo "image_name=${IMAGE_NAME}" >> "$GITHUB_OUTPUT"
+          echo "Image name: ${IMAGE_NAME}"
+
+  generate_dockerfile:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10  #v6.0.3
+    - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 #v6.3.0
+      with:
+        python-version: "3.12"
+    - name: install ansible-builder
+      run: pip install ansible-builder==3.1.1
+    - name: build Dockerfile from execution-environment.yml
+      working-directory: awx-ee
+      run: ansible-builder create --output-filename Dockerfile
+    # see https://github.com/actions/upload-artifact#permission-loss
+    - name: tar files
+      run: tar -cvf build-code.tar -C awx-ee/context .
+    - name: upload build context
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #v7.0.1
+      with:
+        path: build-code.tar
+        archive: false
+        retention-days: 1
+
+  build_and_push:
+    needs:
+      - pre_build
+      - generate_dockerfile
+    uses: dBildungsplattform/dbp-github-workflows/.github/workflows/image-publish-trivy.yaml@8
+    permissions:
+      packages: write
+      contents: read
+      security-events: write
+    with:
+      image_name: ${{ needs.pre_build.outputs.image_name }}
+      container_registry: "ghcr.io"
+      add_latest_tag: true
+      image_tag_generation: "mmp_git_tag,mm_git_tag"
+      context: ./${{ needs.pre_build.outputs.image_name }}
+      code_source: "artifact"
+      run_trivy_scan: false
+      run_clamav_scan: false
+      limit-severities-for-sarif: false
+    secrets: inherit
