@@ -1,3 +1,8 @@
+# bapontag.yaml does not support the decoration with custom jobs (e.g., generate_dockerfile) in its generalized workflow right now
+# also, it does not reference the (mostly duplicated) workflows in *ghcr-on-push.yaml but implements own logic
+# as a big refactoring is out of scope of OPS-11278, the bpontag logic for awxee is partly duplicated here. however:
+# todo: the github workflows in this repo must be refactored
+
 name: awx-ee Build and push Docker Image on Tag
 
 on:
