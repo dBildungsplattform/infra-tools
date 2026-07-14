@@ -24,7 +24,7 @@ additional_build_steps:
     ARG KUBECTL_VERSION=1.33.13
     ARG OP_VERSION=2.34.1
     RUN pip3 install --no-cache-dir --upgrade pip setuptools
-    RUN dnf install -y unzip openssl libcurl-minimal git -y && dnf upgrade --refresh -y && dnf clean all
+    RUN dnf install -y unzip openssl libcurl-minimal git && dnf upgrade --refresh -y && dnf clean all
     RUN cd /tmp && \
         curl -fsSLO https://releases.hashicorp.com/terraform/$TERRAFORM_VERSION/terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
         unzip -o terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
