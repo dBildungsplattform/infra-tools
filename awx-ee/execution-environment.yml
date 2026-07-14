@@ -30,7 +30,7 @@ additional_build_steps:
         unzip -o terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
         install -o root -g root -m 0755 terraform /usr/local/bin/terraform && \
         rm -f terraform_${TERRAFORM_VERSION}_linux_amd64.zip terraform && \
-        curl --proto '=https' --tlsv1.2 -fsSL https://get.opentofu.org/install-opentofu.sh -o install-opentofu.sh && \
+        curl --proto '=https' --tlsv1.2 -fsSL https://raw.githubusercontent.com/opentofu/get.opentofu.org/3d354dfa62d9a36f33df16cdd6bb506ace1e6e2e/static/install-opentofu.sh -o install-opentofu.sh && \
         chmod +x /tmp/install-opentofu.sh && \
         /tmp/install-opentofu.sh --install-method standalone --opentofu-version ${OPENTOFU_VERSION} --install-path /tmp/ && \
         install -o root -g root -m 0755 /tmp/tofu /usr/local/bin/tofu && \
