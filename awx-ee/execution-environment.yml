@@ -19,17 +19,12 @@ options:
 additional_build_steps:
   prepend_final: |
     ARG HELM_VERSION=3.18.2
-    ARG TERRAFORM_VERSION=1.5.7
-    ARG OPENTOFU_VERSION=1.6.2
+    ARG OPENTOFU_VERSION=1.12.4
     ARG KUBECTL_VERSION=1.33.13
     ARG OP_VERSION=2.34.1
     RUN pip3 install --no-cache-dir --upgrade pip setuptools
     RUN dnf install -y unzip openssl libcurl-minimal git && dnf upgrade --refresh -y && dnf clean all
     RUN cd /tmp && \
-        curl -fsSLO https://releases.hashicorp.com/terraform/$TERRAFORM_VERSION/terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
-        unzip -o terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
-        install -o root -g root -m 0755 terraform /usr/local/bin/terraform && \
-        rm -f terraform_${TERRAFORM_VERSION}_linux_amd64.zip terraform && \
         curl --proto '=https' --tlsv1.2 -fsSL https://raw.githubusercontent.com/opentofu/get.opentofu.org/3d354dfa62d9a36f33df16cdd6bb506ace1e6e2e/static/install-opentofu.sh -o install-opentofu.sh && \
         chmod +x /tmp/install-opentofu.sh && \
         /tmp/install-opentofu.sh --install-method standalone --opentofu-version ${OPENTOFU_VERSION} --install-path /tmp/ && \

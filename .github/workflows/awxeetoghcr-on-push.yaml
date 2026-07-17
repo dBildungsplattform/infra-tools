@@ -50,5 +50,5 @@ jobs:
       run_trivy_scan: true
       run_clamav_scan: true
       limit-severities-for-sarif: false
-      # todo: remove when terraform has been migrated to more recent opentofu version (should hopefully to no critical findings)
+      # todo: remove when Helm has been updated (should hopefully to no critical findings)
       fail_on_vulnerabilites: false
