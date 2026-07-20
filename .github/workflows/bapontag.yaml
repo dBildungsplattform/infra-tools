@@ -6,7 +6,6 @@ on:
       - "infra-tools-*.*.*"
       - "infra-tools-debian-*.*.*"
       - "dbcmetrics-*.*.*"
-      - "awx-ee-*.*.*"
       - "cron-tools-*.*.*"
       - "cron-tools-debian-*.*.*"
 
@@ -25,7 +24,7 @@ jobs:
 
   build_and_push:
     needs: pre_build
-    uses: dBildungsplattform/dbp-github-workflows/.github/workflows/image-publish-trivy.yaml@7
+    uses: dBildungsplattform/dbp-github-workflows/.github/workflows/image-publish-trivy.yaml@8
     permissions:
       packages: write
       contents: read
