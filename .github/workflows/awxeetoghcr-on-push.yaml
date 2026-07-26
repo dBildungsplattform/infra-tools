@@ -3,11 +3,11 @@ name: awx-ee Docker Image on Push to GHCR
 on:
   workflow_dispatch:
   push:
-    branches-ignore:
+    branches:
       #- main
       - OPS-10509-update-ansible
-    paths:
-      - "awx-ee/**"
+    #paths:
+    #  - "awx-ee/**"
 concurrency:
   group: awx-ee-${{ github.ref }}
   cancel-in-progress: true
