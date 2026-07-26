@@ -4,7 +4,8 @@ on:
   workflow_dispatch:
   push:
     branches-ignore:
-      - main
+      #- main
+      - OPS-10509-update-ansible
     paths:
       - "awx-ee/**"
 concurrency:
