@@ -1,5 +1,5 @@
 git+https://github.com/dBildungsplattform/infra-tools.git#subdirectory=onepwd
-ansible==11.6.0
+ansible==13.8.0
 ansible-core==2.20.7
 kubernetes==32.0.1
 ionoscloud==6.1.13
