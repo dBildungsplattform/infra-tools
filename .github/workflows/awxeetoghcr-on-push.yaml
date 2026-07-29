@@ -5,7 +5,7 @@ on:
   push:
     branches:
       #- main
-      - OPS-10509-update-ansible
+      - OPS-10493-update-ansible
     #paths:
     #  - "awx-ee/**"
 concurrency:
