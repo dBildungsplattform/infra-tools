@@ -1,6 +1,6 @@
 # s3-backup
 
-[s3-backup](https://github.com/hpi-schul-cloud/infra-tools/tree/master/s3-backup)
+[s3-backup](https://github.com/dBildungsplattform/infra-tools/tree/master/s3-backup)
 
 A tool for the HPI-schul-cloud to backup multiple STRATO S3 Hidrives to a backup STRATO S3 Hidrive using rclone.
 

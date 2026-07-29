@@ -1,6 +1,6 @@
 # sct
 
-[sct](https://github.com/hpi-schul-cloud/infra-tools/tree/master/sct) is a tool, that can download IONOS Kubeconfig for available K8S cluster and open a tunnel for accessing the K8S API server.
+[sct](https://github.com/dBildungsplattform/infra-tools/tree/master/sct) is a tool, that can download IONOS Kubeconfig for available K8S cluster and open a tunnel for accessing the K8S API server.
 Additionally this tool can tunnel connections to any other server and port which is not already in use
 
 ## Prerequisites

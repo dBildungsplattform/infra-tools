@@ -1,4 +1,4 @@
-git+https://github.com/hpi-schul-cloud/infra-tools.git#subdirectory=onepwd
+git+https://github.com/dBildungsplattform/infra-tools.git#subdirectory=onepwd
 ansible==11.6.0
 ansible-core==2.18.6
 kubernetes==32.0.1

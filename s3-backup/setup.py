@@ -11,7 +11,7 @@ setuptools.setup(
     description="S3 backup for the HPI Schul-Cloud",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/hpi-schul-cloud/infra-tools/tree/master/s3-backup",
+    url="https://github.com/dBildungsplattform/infra-tools/tree/master/s3-backup",
     packages=setuptools.find_packages(),
     install_requires=['pyyaml'],
     scripts=['s3-backup.py'],
