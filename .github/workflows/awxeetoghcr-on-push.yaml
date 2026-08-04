@@ -3,7 +3,7 @@ name: awx-ee Docker Image on Push to GHCR
 on:
   workflow_dispatch:
   push:
-    branches:
+    branches-ignore:
       - main
     paths:
       - "awx-ee/**"
