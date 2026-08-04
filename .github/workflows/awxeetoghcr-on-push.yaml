@@ -4,10 +4,9 @@ on:
   workflow_dispatch:
   push:
     branches:
-      #- main
-      - OPS-10493-update-ansible
-    #paths:
-    #  - "awx-ee/**"
+      - main
+    paths:
+      - "awx-ee/**"
 concurrency:
   group: awx-ee-${{ github.ref }}
   cancel-in-progress: true
