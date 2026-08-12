@@ -1,19 +1,27 @@
-FROM ubuntu:24.04
-
 ARG DEBIAN_FRONTEND=noninteractive
-ENV TZ=Europe/Berlin
+ARG MONGODB_VERSION="8.0"
+ARG DUPICITY_VERSION="0.8.23"
+ARG UBUNTU_VERSION="24.04"
+ARG KUBERNETES_VERSION="1.34.2"
 
+FROM ubuntu:${UBUNTU_VERSION}
+
+ENV TZ=Europe/Berlin
+# Consume the build argument in the build stage
+ARG MONGODB_VERSION
+ARG KUBERNETES_VERSION
 RUN set -x \
     && apt-get -y update \
+    && apt-get -y upgrade \
     && apt-get -y install bsdextrautils \
     && apt-get -y install curl wget gnupg \
-    && wget https://dl.k8s.io/release/v1.34.2/bin/linux/amd64/kubectl \
+    && wget https://dl.k8s.io/release/v${KUBERNETES_VERSION}/bin/linux/amd64/kubectl \
     && chmod +x kubectl \
     && mv ./kubectl /usr/local/bin/kubectl \
-    && curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | \
-        gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg \
+    && curl -fsSL https://www.mongodb.org/static/pgp/server-${MONGODB_VERSION}.asc | \
+        gpg -o /usr/share/keyrings/mongodb-server-${MONGODB_VERSION}.gpg \
         --dearmor \
-    && echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-8.0.list \
+    && echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-${MONGODB_VERSION}.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/${MONGODB_VERSION} multiverse" | tee /etc/apt/sources.list.d/mongodb-org-${MONGODB_VERSION}.list \
     && echo "deb https://apt.postgresql.org/pub/repos/apt noble-pgdg main" > /etc/apt/sources.list.d/pgdg.list \
     && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc > /etc/apt/trusted.gpg.d/postgres.asc \
     && apt-get -y update \
@@ -34,4 +42,5 @@ RUN set -x \
     && apt-get clean -y
 
     # https://stackoverflow.com/questions/75602063/pip-install-r-requirements-txt-is-failing-this-environment-is-externally-mana
-RUN pip install duplicity==0.8.23 --break-system-packages
+ARG DUPICITY_VERSION
+RUN pip install duplicity==${DUPICITY_VERSION} --break-system-packages
