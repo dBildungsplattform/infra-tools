@@ -1,9 +1,9 @@
-name: cron-tools Docker Image on Push to GHCR
+name: cron-tools Docker Image on tag to GHCR
 
 on:
   push:
-    branches-ignore:
-      - main
+    tags:
+      - "[0-9]+.[0-9]+.[0-9]+"
     paths:
       - "cron-tools/**"
 
@@ -21,7 +21,7 @@ jobs:
     with:
       image_name: "cron-tools"
       context: "./cron-tools/"
-      image_tag_generation: "ticket_from_branch"
+      image_tag_generation: "version_git_tag"
       add_latest_tag: false
       container_registry: "ghcr.io"
       run_trivy_scan: true

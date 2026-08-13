@@ -1,0 +1,23 @@
+name: Docker Image generation for crontools Cron Job
+
+on:
+  schedule:
+    - cron: "0 2 1 * *"
+  workflow_dispatch:
+
+jobs:
+  build_image_on_cron:
+    permissions:
+      packages: write
+      security-events: write
+      contents: read
+    uses: dBildungsplattform/dbp-github-workflows/.github/workflows/image-publish-trivy.yaml@OPS-11677_CronToolsAuto
+    with:
+      image_name: "cron-tools"
+      context: "./cron-tools/"
+      image_tag_generation: "version_git_tag"
+      add_latest_tag: true
+      container_registry: "ghcr.io"
+      run_trivy_scan: true
+      run_clamav_scan: true
+      limit-severities-for-sarif: false  
