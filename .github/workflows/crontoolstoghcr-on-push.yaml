@@ -27,4 +27,4 @@ jobs:
       run_trivy_scan: true
       run_clamav_scan: true
       limit-severities-for-sarif: false
-      skip_files: "/usr/local/bin/kubectl"
+#      skip_files: "/usr/local/bin/kubectl"
