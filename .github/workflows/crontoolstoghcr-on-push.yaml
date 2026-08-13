@@ -17,7 +17,7 @@ jobs:
       packages: write
       security-events: write
       contents: read
-    uses: dBildungsplattform/dbp-github-workflows/.github/workflows/image-publish-trivy.yaml@OPS-11677_CronToolsAuto
+    uses: dBildungsplattform/dbp-github-workflows/.github/workflows/image-publish-trivy.yaml@OPS-11677_CronToolsAuto # to be changed to @8 --- IGNORE ---
     with:
       image_name: "cron-tools"
       context: "./cron-tools/"
