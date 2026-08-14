@@ -13,7 +13,7 @@ ARG KUBERNETES_VERSION
 RUN set -x \
     && apt-get -y update \
     && apt-get -y upgrade \
-    && apt-get -y dist-upgrade \    
+    && apt-get -y dist-upgrade \
     && apt-get -y install bsdextrautils \
     && apt-get -y install curl wget gnupg \
     && wget https://dl.k8s.io/release/v${KUBERNETES_VERSION}/bin/linux/amd64/kubectl \
