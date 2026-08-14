@@ -19,7 +19,7 @@ jobs:
     with:
       image_name: "cron-tools"
       context: "./cron-tools/"
-      image_tag_generation: ""
+      image_tag_generation: "monthly_schedule_tag"
       add_latest_tag: false
       container_registry: "ghcr.io"
       run_trivy_scan: true
