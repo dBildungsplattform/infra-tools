@@ -3,25 +3,24 @@ name: Docker Image generation for crontools Cron Job
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 2 14 * *"
+    - cron: "0 2 17 * *"
 
 concurrency:
   group: cron-tools-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  build_image_on_push:
+  build_monthly_image:
     permissions:
       packages: write
       security-events: write
       contents: read
-    uses: dBildungsplattform/dbp-github-workflows/.github/workflows/image-publish-trivy.yaml@OPS-11677_CronToolsAuto2 #to be changed to @8 --- IGNORE ---
+    uses: dBildungsplattform/dbp-github-workflows/.github/workflows/image-publish-trivy.yaml@8
     with:
       image_name: "cron-tools"
       context: "./cron-tools/"
-      # image_tag_generation: "monthly_schedule_tag"
       image_tag_generation: "specified"
-      image_tag: "Monthly-{{date 'YYYY-MM'}}"
+      image_tag: "Monthly_{{date 'YYYY-MM'}}"
       add_latest_tag: false
       container_registry: "ghcr.io"
       run_trivy_scan: true
