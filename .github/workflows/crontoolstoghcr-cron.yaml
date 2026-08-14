@@ -1,32 +1,27 @@
 name: Docker Image generation for crontools Cron Job
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "0 2 14 * *"
-  workflow_dispatch:
+
+concurrency:
+  group: cron-tools-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
-  monthly_build:
-    runs-on: ubuntu-latest
-
-    steps:
-         
-      - name: Checkout branch
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - name: Generate build tag
-        id: generate_build_tag
-        run: echo "tag=crontools-$(date +'%Y-%m')" >> $GITHUB_OUTPUT
-
-      - name: Build Image
-        uses: dBildungsplattform/dbp-github-workflows/.github/workflows/image-publish-trivy.yaml@OPS-11677_CronToolsAuto #to be changed to @8 --- IGNORE ---
-        with:
-          image_name: "cron-tools"
-          context: "./cron-tools/"
-          image_tag_generation: "specified"
-          image_tag: ${{ steps.generate_build_tag.outputs.tag }}
-          add_latest_tag: false
-          container_registry: "ghcr.io"
-          run_trivy_scan: true
-          run_clamav_scan: true
-          limit-severities-for-sarif: false
-          skip_files: "/usr/local/bin/kubectl"
+  build_image_on_push:
+    permissions:
+      packages: write
+      security-events: write
+      contents: read
+    uses: dBildungsplattform/dbp-github-workflows/.github/workflows/image-publish-trivy.yaml@OPS-11677_CronToolsAuto2 #to be changed to @8 --- IGNORE ---
+    with:
+      image_name: "cron-tools"
+      context: "./cron-tools/"
+      image_tag_generation: ""
+      add_latest_tag: false
+      container_registry: "ghcr.io"
+      run_trivy_scan: true
+      run_clamav_scan: true
+      limit-severities-for-sarif: false
