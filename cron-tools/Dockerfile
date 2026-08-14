@@ -1,10 +1,10 @@
-ARG DEBIAN_FRONTEND=noninteractive
 ARG MONGODB_VERSION="8.0"
 ARG DUPICITY_VERSION="0.8.23"
 ARG UBUNTU_VERSION="24.04"
 ARG KUBERNETES_VERSION="1.34.9"
 
 FROM ubuntu:${UBUNTU_VERSION}
+ARG DEBIAN_FRONTEND=noninteractive
 
 ENV TZ=Europe/Berlin
 # Consume the build argument in the build stage
