@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Generate build tag
         id: generate_build_tag
-        run: echo"tag=crontools-$(date +'%Y-%m')" >> $GITHUB_OUTPUT
+        run: echo "tag=crontools-$(date +'%Y-%m')" >> $GITHUB_OUTPUT
 
       # - name: Build Image
       #   uses: dBildungsplattform/dbp-github-workflows/.github/workflows/image-publish-trivy.yaml@OPS-11677_CronToolsAuto #to be changed to @8 --- IGNORE ---
