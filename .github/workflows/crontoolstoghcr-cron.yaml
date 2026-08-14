@@ -19,7 +19,9 @@ jobs:
     with:
       image_name: "cron-tools"
       context: "./cron-tools/"
-      image_tag_generation: "monthly_schedule_tag"
+      # image_tag_generation: "monthly_schedule_tag"
+      image_tag_generation: "specified"
+      image_tag: "Monthly-{{date 'YYYY-MM'}}"
       add_latest_tag: false
       container_registry: "ghcr.io"
       run_trivy_scan: true
