@@ -16,7 +16,10 @@ RUN set -x \
     && apt-get -y dist-upgrade \
     && apt-get -y install bsdextrautils \
     && apt-get -y install curl wget gnupg \
-    && wget https://dl.k8s.io/release/v${KUBERNETES_VERSION}/bin/linux/amd64/kubectl \
+    && wget -q https://dl.k8s.io/release/v${KUBERNETES_VERSION}/bin/linux/amd64/kubectl \
+    && wget -q https://dl.k8s.io/release/v${KUBERNETES_VERSION}/bin/linux/amd64/kubectl.sha256 \
+    && echo "$(cat kubectl.sha256)  kubectl" | sha256sum -c - \
+    && rm -f kubectl.sha256 \
     && chmod +x kubectl \
     && mv ./kubectl /usr/local/bin/kubectl \
     && curl -fsSL https://www.mongodb.org/static/pgp/server-${MONGODB_VERSION}.asc | \
