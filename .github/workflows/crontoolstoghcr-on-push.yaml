@@ -27,4 +27,3 @@ jobs:
       run_trivy_scan: true
       run_clamav_scan: true
       limit-severities-for-sarif: false
-      
