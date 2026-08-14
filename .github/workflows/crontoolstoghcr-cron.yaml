@@ -13,17 +13,25 @@ jobs:
       - name: Checkout branch
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Generate release tag
-        id: generate_release_tag
-        uses: amitsingh-007/next-release-tag@f0ea640ef142d04e2f91e1df087f6782585548af # v6.6.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          tag_prefix: 'test-v'
-          tag_template: 'yyyy.mm.i'
-          previous_tag: ''
-#      - name: Bump version and push tag
-#        uses: anothrNick/github-tag-action@4ed44965e0db8dab2b466a16da04aec3cc312fd8 # v1.75.0
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
-#          CUSTOM_TAG: ${{ steps.generate_release_tag.outputs.next_release_tag }}
+      - name: Generate build tag
+        id: generate_build_tag
+        run: echo"tag=crontools-$(date +'%Y-%m')" >> $GITHUB_OUTPUT
 
+      - name: Build Image
+        id: build_image
+        permissions:
+          packages: write
+          security-events: write
+          contents: read
+        uses: dBildungsplattform/dbp-github-workflows/.github/workflows/image-publish-trivy.yaml@OPS-11677_CronToolsAuto #to be changed to @8 --- IGNORE ---
+        with:
+          image_name: "cron-tools"
+          context: "./cron-tools/"
+          image_tag_generation: "specified"
+          image_tag: ${{ steps.generate_build_tag.outputs.tag }}
+          add_latest_tag: false
+          container_registry: "ghcr.io"
+          run_trivy_scan: true
+          run_clamav_scan: true
+          limit-severities-for-sarif: false
+          skip_files: "/usr/local/bin/kubectl"
