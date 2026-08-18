@@ -3,7 +3,7 @@ name: Docker Image generation for crontools Cron Job
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 2 18 * *"
+    - cron: "0 2 1 * *"
       timezone: "Europe/Berlin"
 
 concurrency:
