@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 2 1 * *"
-      timezone: "Europe/Berlin"
 
 concurrency:
   group: cron-tools-${{ github.ref }}
@@ -21,7 +20,7 @@ jobs:
       image_name: "cron-tools"
       context: "./cron-tools/"
       image_tag_generation: "specified"
-      image_tag: "Monthly_{{date 'YYYY-MM'}}"
+      image_tag: "scheduled-{{date 'YYYYMMDD'}}"
       add_latest_tag: false
       container_registry: "ghcr.io"
       run_trivy_scan: true
