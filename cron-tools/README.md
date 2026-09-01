@@ -7,3 +7,4 @@ Minimal image with the tools that are necessary for our Kubernetes CronJobs.
 * [mongosh](https://www.mongodb.com/docs/mongodb-shell/)
 * [psql](https://www.postgresql.org/docs/current/app-psql.html)
 * [wget](https://www.gnu.org/software/wget/)
+ 
