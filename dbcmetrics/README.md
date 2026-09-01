@@ -212,3 +212,4 @@ And a section like this for the uptimekumamaintenance module:
 # TYPE uptime_kuma_maintenance_active gauge
 uptime_kuma_maintenance_active{monitor_id="1",monitor_name="Test"} 1.0
 ```
+ 
