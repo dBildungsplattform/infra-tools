@@ -7,7 +7,7 @@
 1. Clone the repo
 
 ````go
-git clone https://github.com/hpi-schul-cloud/infra-tools/
+git clone https://github.com/dBildungsplattform/infra-tools/
 cd ionos-cost-calc
 
 `````

@@ -10,7 +10,7 @@ setuptools.setup(
     author_email="devops@dbildungscloud.de",
     description="Utilities to work with 1password",
     long_description=long_description,
-    url="https://github.com/hpi-schul-cloud/infra-tools",
+    url="https://github.com/dBildungsplattform/infra-tools",
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
     scripts=['bin/onepwd'],
