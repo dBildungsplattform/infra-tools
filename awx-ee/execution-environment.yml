@@ -5,7 +5,7 @@ images:
     name: quay.io/centos/centos:stream9
 dependencies:
   ansible_core:
-    package_pip: ansible-core==2.18.6
+    package_pip: ansible-core==2.20.7
   ansible_runner:
     package_pip: ansible-runner==2.4.1
   galaxy: _build/requirements.yml
@@ -20,7 +20,7 @@ additional_build_steps:
   prepend_final: |
     ARG HELM_VERSION=3.18.2
     ARG OPENTOFU_VERSION=1.12.4
-    ARG KUBECTL_VERSION=1.33.13
+    ARG KUBECTL_VERSION=1.34.2
     ARG OP_VERSION=2.34.1
     RUN pip3 install --no-cache-dir --upgrade pip setuptools
     RUN dnf install -y unzip openssl libcurl-minimal git && dnf upgrade --refresh -y && dnf clean all

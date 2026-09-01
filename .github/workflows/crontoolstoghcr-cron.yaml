@@ -1,0 +1,30 @@
+name: Docker Image generation for crontools Cron Job
+
+on:
+  workflow_dispatch:
+  schedule:
+    # GitHub Actions schedule cron is evaluated in UTC, so this runs at 02:00 UTC
+    # on the 1st of each month. In Europe/Berlin, the local run time shifts with DST.
+    - cron: "0 2 1 * *"
+
+concurrency:
+  group: cron-tools-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build_monthly_image:
+    permissions:
+      packages: write
+      security-events: write
+      contents: read
+    uses: dBildungsplattform/dbp-github-workflows/.github/workflows/image-publish-trivy.yaml@8
+    with:
+      image_name: "cron-tools"
+      context: "./cron-tools/"
+      image_tag_generation: "specified"
+      image_tag: "scheduled-{{date 'YYYYMMDD'}}"
+      add_latest_tag: false
+      container_registry: "ghcr.io"
+      run_trivy_scan: true
+      run_clamav_scan: true
+      limit-severities-for-sarif: false
