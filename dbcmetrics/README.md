@@ -3,7 +3,7 @@
 A containerized Python application which exposes special dBildungscloud values as Prometheus metrics. The application can have multiple modules for different values, e.g. a module for the application version of a running dBildungscloud instance or a further module providing the amount of mails in the dBidlungscloud mailboxes.
 The port where metrics are exposed is currently hard coded to 9000.
 
-The source code can be found in the [dbcmetrics](https://github.com/dBildungsplattform/infra-tools/tree/master/dbcmetrics) folder of the infra-tools repository of dBildungsplattform on github.
+The source code can be found in the [dbcmetrics](https://github.com/dbildungsplattform/infra-tools/tree/master/dbcmetrics) folder of the infra-tools repository of dbildungsplattform on github.
 
 ## Modules
 | Name                  | metrics for       |
@@ -121,7 +121,7 @@ docker run `
 
 ## As a Helm release on Kubernetes
 
-To install dbcmetrics with helm in your local kubernetes cluster you first need to clone the [infra-schulcloud](https://github.com/dBildungsplattform/infra-schulcloud) repository.
+To install dbcmetrics with helm in your local kubernetes cluster you first need to clone the [infra-schulcloud](https://github.com/dbildungsplattform/infra-schulcloud) repository.
 Then you need to remove the `charts/dbcmetrics/templates/servicemonitor.yaml` file locally (do not commit this change) because this is a Kubernetes Custom Resource Definition (CRD) that is created by installing the [kube-prometheus stack](https://github.com/prometheus-operator/kube-prometheus) helm chart, so it doesn't exist on your local kubernetes cluster as long as you don't have the kube-prometheus stack installed.
 
 Afterwards you need to create a secret with the name `dbcmetrics-secret` with three key-value pairs (for the storage module)
@@ -148,9 +148,9 @@ If the uptimekumamaintenance module is enabled you need a secret with the name `
 
 If you have done that you can install the dbcmetrics helm chart by in the `charts/` directory of the cloned `infra-schulcloud` repository and run the command
 ```
-helm install dbcmetrics .\dbcmetrics\ --set image.repository=ghcr.io/dBildungsplattform/dbcmetrics --set image.tag=latest
+helm install dbcmetrics .\dbcmetrics\ --set image.repository=ghcr.io/dbildungsplattform/dbcmetrics --set image.tag=latest
 ```
-This will install the container image with the `latest` tag from [dbcmetrics image repository](https://github.com/dBildungsplattform/infra-tools/pkgs/container/dbcmetrics) of the `infra-tools` github repository.
+This will install the container image with the `latest` tag from [dbcmetrics image repository](https://github.com/dbildungsplattform/infra-tools/pkgs/container/dbcmetrics) of the `infra-tools` github repository.
 
 If the installation is successful you can look up the dbcmetrics deployment for example in Lens, click on the pod, look at the ports of the `dbcmetrics` container on the pod and create a port forward with port `9000` to access the container endpoint from your local machine.
 

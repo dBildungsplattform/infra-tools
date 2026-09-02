@@ -1,4 +1,4 @@
-git+https://github.com/dBildungsplattform/infra-tools.git#subdirectory=onepwd
+git+https://github.com/dbildungsplattform/infra-tools.git#subdirectory=onepwd
 ansible==13.8.0
 ansible-core==2.20.7
 kubernetes==34.1.0

@@ -49,7 +49,7 @@ jobs:
     needs:
       - pre_build
       - generate_dockerfile
-    uses: dBildungsplattform/dbp-github-workflows/.github/workflows/image-publish-trivy.yaml@8
+    uses: dbildungsplattform/dbp-github-workflows/.github/workflows/image-publish-trivy.yaml@8
     permissions:
       packages: write
       contents: read
