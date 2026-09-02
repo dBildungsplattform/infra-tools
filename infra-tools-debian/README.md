@@ -26,7 +26,7 @@ Makefile). For example set `DOCKER_IMAGE_TAG` to push a custom image tag:
 make push DOCKER_IMAGE_TAG="foo/bar:latest"
 ```
 
-List of available docker image tags is under https://github.com/dBildungsplattform/infra-tools/pkgs/container/infra-tools
+List of available docker image tags is under https://github.com/dbildungsplattform/infra-tools/pkgs/container/infra-tools
 
 ## Provided Tools
 * [curl](https://curl.haxx.se/docs/manpage.html)

@@ -7,7 +7,7 @@
 1. Clone the repo
 
 ````go
-git clone https://github.com/dBildungsplattform/infra-tools/
+git clone https://github.com/dbildungsplattform/infra-tools/
 cd ionos-cost-calc
 
 `````
